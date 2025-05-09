@@ -44,12 +44,8 @@
     </div>
     <!-- 固钉频道栏 -->
     <div class="header-channel-fixed" :style="isFixChannel ? '' : 'display: none;'">
-      <div
-        class="header-channel-fixed-container"
-        :class="isChannelDown ? 'header-channel-fixed-down' : ''"
-        @mouseenter="isChannelDown = true"
-        @mouseleave="isChannelDown = false"
-      >
+      <div class="header-channel-fixed-container" :class="isChannelDown ? 'header-channel-fixed-down' : ''"
+        @mouseenter="isChannelDown = true" @mouseleave="isChannelDown = false">
         <div class="header-channel-fixed-left">
           <div class="left-fixed-channel">
             <i class="iconfont icon-fengche"></i>
@@ -66,36 +62,18 @@
             <div class="left-top">
               <a :href="`/v/anime`" target="_blank" class="header-channel-fixed-right-item">番剧</a>
               <a :href="`/movie`" target="_blank" class="header-channel-fixed-right-item">电影</a>
-              <a :href="`/v/guochuang`" target="_blank" class="header-channel-fixed-right-item"
-                >国创</a
-              >
+              <a :href="`/v/guochuang`" target="_blank" class="header-channel-fixed-right-item">国创</a>
               <a :href="`/tv`" target="_blank" class="header-channel-fixed-right-item">电视剧</a>
               <a :href="`/variety`" target="_blank" class="header-channel-fixed-right-item">综艺</a>
-              <a :href="`/documentary`" target="_blank" class="header-channel-fixed-right-item"
-                >纪录片</a
-              >
-              <a
-                :href="`/v/${item.mcId}`"
-                target="_blank"
-                class="header-channel-fixed-right-item"
-                v-for="(item, index) in channels.slice(2)"
-                :key="index"
-              >
+              <a :href="`/documentary`" target="_blank" class="header-channel-fixed-right-item">纪录片</a>
+              <a :href="`/v/${item.mcId}`" target="_blank" class="header-channel-fixed-right-item"
+                v-for="(item, index) in channels.slice(2)" :key="index">
                 {{ item.mcName }}
               </a>
               <!-- 这里的url要在VLOG标签做出来后重新修改，目前先暂定到生活日常区 -->
-              <a :href="`/v/life/daily`" target="_blank" class="header-channel-fixed-right-item"
-                >VLOG</a
-              >
-              <a :href="`/v/life/funny`" target="_blank" class="header-channel-fixed-right-item"
-                >搞笑</a
-              >
-              <a
-                :href="`/v/game/stand_alone`"
-                target="_blank"
-                class="header-channel-fixed-right-item"
-                >单机游戏</a
-              >
+              <a :href="`/v/life/daily`" target="_blank" class="header-channel-fixed-right-item">VLOG</a>
+              <a :href="`/v/life/funny`" target="_blank" class="header-channel-fixed-right-item">搞笑</a>
+              <a :href="`/v/game/stand_alone`" target="_blank" class="header-channel-fixed-right-item">单机游戏</a>
               <a :href="`/love`" target="_blank" class="header-channel-fixed-right-item">公益</a>
               <a :href="`/mooc`" target="_blank" class="header-channel-fixed-right-item">公开课</a>
             </div>
@@ -105,59 +83,31 @@
             <a :href="`/live`" target="_blank" class="header-channel-fixed-right-item">直播</a>
             <a :href="`/activity`" target="_blank" class="header-channel-fixed-right-item">活动</a>
             <a :href="`/cheese`" target="_blank" class="header-channel-fixed-right-item">课堂</a>
-            <a
-              :href="`/community`"
-              target="_blank"
-              class="header-channel-fixed-right-item"
-              style="letter-spacing: 0px"
-              >社区中心</a
-            >
-            <a
-              :href="`/song`"
-              target="_blank"
-              class="header-channel-fixed-right-item"
-              style="letter-spacing: 0px"
-              >新歌热榜</a
-            >
+            <a :href="`/community`" target="_blank" class="header-channel-fixed-right-item"
+              style="letter-spacing: 0px">社区中心</a>
+            <a :href="`/song`" target="_blank" class="header-channel-fixed-right-item"
+              style="letter-spacing: 0px">新歌热榜</a>
           </div>
           <div class="left-bottom">
             <a :href="`/v/anime`" target="_blank" class="header-channel-fixed-right-item">番剧</a>
             <a :href="`/movie`" target="_blank" class="header-channel-fixed-right-item">电影</a>
-            <a :href="`/v/guochuang`" target="_blank" class="header-channel-fixed-right-item"
-              >国创</a
-            >
+            <a :href="`/v/guochuang`" target="_blank" class="header-channel-fixed-right-item">国创</a>
             <a :href="`/tv`" target="_blank" class="header-channel-fixed-right-item">电视剧</a>
             <a :href="`/variety`" target="_blank" class="header-channel-fixed-right-item">综艺</a>
-            <a :href="`/documentary`" target="_blank" class="header-channel-fixed-right-item"
-              >纪录片</a
-            >
-            <a
-              :href="`/v/${item.mcId}`"
-              target="_blank"
-              class="header-channel-fixed-right-item"
-              v-for="(item, index) in channels.slice(2)"
-              :key="index"
-            >
+            <a :href="`/documentary`" target="_blank" class="header-channel-fixed-right-item">纪录片</a>
+            <a :href="`/v/${item.mcId}`" target="_blank" class="header-channel-fixed-right-item"
+              v-for="(item, index) in channels.slice(2)" :key="index">
               {{ item.mcName }}
             </a>
-            <a :href="`/v/life/daily`" target="_blank" class="header-channel-fixed-right-item"
-              >VLOG</a
-            >
-            <a :href="`/v/life/funny`" target="_blank" class="header-channel-fixed-right-item"
-              >搞笑</a
-            >
-            <a :href="`/v/game/stand_alone`" target="_blank" class="header-channel-fixed-right-item"
-              >单机游戏</a
-            >
+            <a :href="`/v/life/daily`" target="_blank" class="header-channel-fixed-right-item">VLOG</a>
+            <a :href="`/v/life/funny`" target="_blank" class="header-channel-fixed-right-item">搞笑</a>
+            <a :href="`/v/game/stand_alone`" target="_blank" class="header-channel-fixed-right-item">单机游戏</a>
             <a :href="`/love`" target="_blank" class="header-channel-fixed-right-item">公益</a>
             <a :href="`/mooc`" target="_blank" class="header-channel-fixed-right-item">公开课</a>
           </div>
         </div>
         <div class="header-channel-fixed-arrow">
-          <div
-            class="iconfont icon-xiajiantou"
-            :style="isChannelDown ? 'transform: rotate(180deg);' : ''"
-          ></div>
+          <div class="iconfont icon-xiajiantou" :style="isChannelDown ? 'transform: rotate(180deg);' : ''"></div>
         </div>
       </div>
     </div>
@@ -194,17 +144,10 @@
             </div>
           </div>
           <!-- 随机推荐 -->
-          <div
-            class="feed-card"
-            v-for="index in loadingRandom ? 11 : randomVideos.length"
-            :key="index"
-          >
+          <div class="feed-card" v-for="index in loadingRandom ? 11 : randomVideos.length" :key="index">
             <div class="video-card">
               <!-- 骨架屏 -->
-              <div
-                class="video-card__skeleton"
-                :class="loadingRandom ? 'loading_animation' : 'hide'"
-              >
+              <div class="video-card__skeleton" :class="loadingRandom ? 'loading_animation' : 'hide'">
                 <div class="video-card__skeleton--cover"></div>
                 <div class="video-card__skeleton--info">
                   <div class="video-card__skeleton--right">
@@ -220,10 +163,7 @@
                   <div class="video-card__image">
                     <div class="video-card__image--wrap">
                       <picture class="video-card__cover">
-                        <img
-                          :src="randomVideos[index - 1].video.coverUrl"
-                          :alt="randomVideos[index - 1].video.title"
-                        />
+                        <img :src="randomVideos[index - 1].video.coverUrl" :alt="randomVideos[index - 1].video.title" />
                       </picture>
                     </div>
                     <div class="video-card__mask">
@@ -260,11 +200,8 @@
                       <div class="video-card__info--icon-text" :style="'display: none;'">
                         已关注
                       </div>
-                      <a
-                        class="video-card__info--owner"
-                        :href="`/space/${randomVideos[index - 1].user.uid}`"
-                        target="_blank"
-                      >
+                      <a class="video-card__info--owner" :href="`/space/${randomVideos[index - 1].user.uid}`"
+                        target="_blank">
                         <i class="iconfont icon-uper" :style="''"></i>
                         <span class="video-card__info--author">{{
                           randomVideos[index - 1].user.nickname
@@ -333,11 +270,7 @@
                   </h3>
                   <div class="video-card__info--bottom">
                     <div class="video-card__info--icon-text" :style="'display: none;'">已关注</div>
-                    <a
-                      class="video-card__info--owner"
-                      :href="`/space/${item.user.uid}`"
-                      target="_blank"
-                    >
+                    <a class="video-card__info--owner" :href="`/space/${item.user.uid}`" target="_blank">
                       <i class="iconfont icon-uper" :style="''"></i>
                       <span class="video-card__info--author">{{ item.user.nickname }}</span>
                       <span class="video-card__info--date">
@@ -350,12 +283,7 @@
             </div>
           </div>
           <!-- 骨架屏 -->
-          <div
-            class="video-card"
-            v-for="index in 10"
-            :key="index"
-            :style="hasMore ? '' : 'display: none;'"
-          >
+          <div class="video-card" v-for="index in 10" :key="index" :style="hasMore ? '' : 'display: none;'">
             <div class="video-card__skeleton loading_animation">
               <div class="video-card__skeleton--cover"></div>
               <div class="video-card__skeleton--info">
@@ -369,17 +297,11 @@
           </div>
         </div>
         <div class="feed-roll-btn">
-          <div
-            class="roll-btn"
-            @click="
-              getRandomVideos();
-              refreshTime++;
-            "
-          >
-            <i
-              class="iconfont icon-shuaxin"
-              :style="`transform: rotate(${refreshTime * 360}deg);`"
-            ></i>
+          <div class="roll-btn" @click="
+            getRandomVideos();
+          refreshTime++;
+          ">
+            <i class="iconfont icon-shuaxin" :style="`transform: rotate(${refreshTime * 360}deg);`"></i>
             <span>换一换</span>
           </div>
         </div>
@@ -388,192 +310,183 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import HeaderBar from '@/components/HeaderBar.vue'
 import HeaderChannel from '@/components/HeaderChannel.vue'
 import CarouselIndex from '@/components/CarouselIndex.vue'
 import { handleTime, handleNum, handleDate } from '@/utils/utils.js'
+import store from '@/store'
+
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 
 let headerHight, bottomDistance
+// 是否是固钉导航栏
+let isFixHeaderBar = ref(false)
+// 是否是固钉频道栏
+let isFixChannel = ref(false)
+// 是否显示更多频道
+let isChannelDown = ref(false)
+// 随机推荐视频列表
+let randomVideos = ref([])
+// 累加视频列表
+let cumulativeVideos = ref([])
+// 累加视频id列表
+let vids = ref([])
+// 是否正在加载随机推荐
+let loadingRandom = ref(true)
+// 是否还有更多累加视频
+let hasMore = ref(true)
+// 是否正在加载更多视频中
+let loadingMore = ref(true)
+// 刷新次数
+let refreshTime = ref(0)
 
-export default {
-  name: 'IndexVue',
-  components: {
-    HeaderBar,
-    HeaderChannel,
-    CarouselIndex,
-  },
-  data() {
-    return {
-      // 是否是固钉导航栏
-      isFixHeaderBar: false,
-      // 是否是固钉频道栏
-      isFixChannel: false,
-      // 是否显示更多频道
-      isChannelDown: false,
-      // 随机推荐视频列表
-      randomVideos: [],
-      // 累加视频列表
-      cumulativeVideos: [],
-      // 累加视频id列表
-      vids: [],
-      // 是否正在加载随机推荐
-      loadingRandom: true,
-      // 是否还有更多累加视频
-      hasMore: true,
-      // 是否正在加载更多视频中
-      loadingMore: false,
-      // 刷新次数
-      refreshTime: 0,
+const channels = computed(() => {
+  // 频道列表
+  return store.state.channels
+})
+
+// 请求
+// 获取游客随机推荐
+async function getRandomVideos() {
+  loadingRandom = true
+  const res = await $get('/video/random/visitor')
+  if (res.data.data) {
+    randomVideos = res.data.data
+    loadingRandom = false
+  }
+  // console.log(this.randomVideos);
+}
+
+// 获取游客累加推荐
+async function getCumulativeVideos() {
+  loadingMore = true
+  let ids = vids.join(',') // 用逗号连接成一个字符串
+  const res = await $get('/video/cumulative/visitor', {
+    params: { vids: ids },
+  })
+  if (res.data.data) {
+    cumulativeVideos.push(...res.data.data.videos)
+    vids.push(...res.data.data.vids)
+    hasMore = res.data.data.more
+  }
+  // console.log(this.cumulativeVideos);
+  loadingMore = false
+}
+
+// 事件
+// 初始化头图效果
+function initHeader() {
+  let startingPoint
+  const header = document.querySelector('header')
+  let isMoving = false
+
+  handleMouseMove = (e) => {
+    const headerRect = header.getBoundingClientRect() // 动态获取header的位置
+    if (
+      e.clientX >= headerRect.left &&
+      e.clientX <= headerRect.right &&
+      e.clientY >= headerRect.top &&
+      e.clientY <= headerRect.bottom
+    ) {
+      // 当鼠标进入头图范围就开始动态效果
+      if (!isMoving) {
+        startingPoint = e.clientX
+        header.classList.add('moving')
+        isMoving = true
+      }
+      let percentage = (e.clientX - startingPoint) / window.outerWidth + 0.5
+      header.style.setProperty('--percentage', percentage)
+    } else {
+      // 鼠标移出头图范围，效果复原
+      if (isMoving) {
+        header.classList.remove('moving')
+        header.style.setProperty('--percentage', 0.5)
+        isMoving = false
+      }
     }
-  },
-  computed: {
-    // 频道列表
-    channels() {
-      return this.$store.state.channels
-    },
-  },
-  methods: {
-    // 请求
-    // 获取游客随机推荐
-    async getRandomVideos() {
-      this.loadingRandom = true
-      const res = await this.$get('/video/random/visitor')
-      if (res.data.data) {
-        this.randomVideos = res.data.data
-        this.loadingRandom = false
-      }
-      // console.log(this.randomVideos);
-    },
+  }
 
-    // 获取游客累加推荐
-    async getCumulativeVideos() {
-      this.loadingMore = true
-      let ids = this.vids.join(',') // 用逗号连接成一个字符串
-      const res = await this.$get('/video/cumulative/visitor', {
-        params: { vids: ids },
-      })
-      if (res.data.data) {
-        this.cumulativeVideos.push(...res.data.data.videos)
-        this.vids.push(...res.data.data.vids)
-        this.hasMore = res.data.data.more
-      }
-      // console.log(this.cumulativeVideos);
-      this.loadingMore = false
-    },
+  handleMouseOut = (e) => {
+    if (e.relatedTarget === null) {
+      // 鼠标离开窗口时，头图回到原位
+      header.classList.remove('moving')
+      header.style.setProperty('--percentage', 0.5)
+      isMoving = false
+    }
+  }
 
-    // 事件
-    // 初始化头图效果
-    initHeader() {
-      let startingPoint
-      const header = document.querySelector('header')
-      let isMoving = false
+  // 监听窗口鼠标移动事件，触发头图转变效果
+  document.addEventListener('mousemove', handleMouseMove)
+  // 检测鼠标是否离开窗口
+  document.addEventListener('mouseout', handleMouseOut)
+}
 
-      this.handleMouseMove = (e) => {
-        const headerRect = header.getBoundingClientRect() // 动态获取header的位置
-        if (
-          e.clientX >= headerRect.left &&
-          e.clientX <= headerRect.right &&
-          e.clientY >= headerRect.top &&
-          e.clientY <= headerRect.bottom
-        ) {
-          // 当鼠标进入头图范围就开始动态效果
-          if (!isMoving) {
-            startingPoint = e.clientX
-            header.classList.add('moving')
-            isMoving = true
-          }
-          let percentage = (e.clientX - startingPoint) / window.outerWidth + 0.5
-          header.style.setProperty('--percentage', percentage)
-        } else {
-          // 鼠标移出头图范围，效果复原
-          if (isMoving) {
-            header.classList.remove('moving')
-            header.style.setProperty('--percentage', 0.5)
-            isMoving = false
-          }
-        }
-      }
+async function handleScroll() {
+  // 计算页面底部距离
+  const windowHeight = window.innerHeight
+  const documentHeight = document.documentElement.scrollHeight
+  bottomDistance = documentHeight - (window.scrollY + windowHeight)
 
-      this.handleMouseOut = (e) => {
-        if (e.relatedTarget === null) {
-          // 鼠标离开窗口时，头图回到原位
-          header.classList.remove('moving')
-          header.style.setProperty('--percentage', 0.5)
-          isMoving = false
-        }
-      }
+  // 导航栏
+  if (el.scrollTop >= 64 && !isFixHeaderBar) {
+    isFixHeaderBar = true
+  } else if (el.scrollTop < 64 && isFixHeaderBar) {
+    isFixHeaderBar = false
+  }
 
-      // 监听窗口鼠标移动事件，触发头图转变效果
-      document.addEventListener('mousemove', this.handleMouseMove)
-      // 检测鼠标是否离开窗口
-      document.addEventListener('mouseout', this.handleMouseOut)
-    },
+  // 频道栏
+  if (el.scrollTop >= headerHight && !isFixChannel) {
+    isFixChannel = true
+  } else if (el.scrollTop < headerHight && isFixChannel) {
+    isFixChannel = false
+  }
 
-    async handleScroll() {
-      // 计算页面底部距离
-      const windowHeight = window.innerHeight
-      const documentHeight = document.documentElement.scrollHeight
-      bottomDistance = documentHeight - (window.scrollY + windowHeight)
+  // 当距离底部小于800且有更多数据时触发加载数据的函数
+  if (bottomDistance < 800 && hasMore && !loadingMore) {
+    await getCumulativeVideos()
+  }
+}
 
-      // 导航栏
-      if (this.el.scrollTop >= 64 && !this.isFixHeaderBar) {
-        this.isFixHeaderBar = true
-      } else if (this.el.scrollTop < 64 && this.isFixHeaderBar) {
-        this.isFixHeaderBar = false
-      }
+// 处理播放时长
+function handleDuration(time) {
+  return handleTime(time)
+}
 
-      // 频道栏
-      if (this.el.scrollTop >= headerHight && !this.isFixChannel) {
-        this.isFixChannel = true
-      } else if (this.el.scrollTop < headerHight && this.isFixChannel) {
-        this.isFixChannel = false
-      }
+// 处理大于一万的数字
+function handleNum(number) {
+  return handleNum(number)
+}
 
-      // 当距离底部小于800且有更多数据时触发加载数据的函数
-      if (bottomDistance < 800 && this.hasMore && !this.loadingMore) {
-        await this.getCumulativeVideos()
-      }
-    },
+// 处理投稿时间
+function handleDate(date) {
+  return handleDate(date)
+}
 
-    // 处理播放时长
-    handleDuration(time) {
-      return handleTime(time)
-    },
+getRandomVideos()
 
-    // 处理大于一万的数字
-    handleNum(number) {
-      return handleNum(number)
-    },
-
-    // 处理投稿时间
-    handleDate(date) {
-      return handleDate(date)
-    },
-  },
-  created() {
-    this.getRandomVideos()
-  },
-  async mounted() {
+onMounted(async () => {
+  {
     // 初始化头图的监听器
-    this.initHeader()
+    initHeader()
     // 窗口滚动时根据高度判断是否显示固钉导航栏和固钉频道栏
-    this.el = document.documentElement
+    el = document.documentElement
     // 根据主体顶部的偏移量计算 header 的高度
     headerHight = document.querySelector('.main__layout').offsetTop
-    window.addEventListener('scroll', this.handleScroll)
+    window.addEventListener('scroll', handleScroll)
     // 初次挂载时执行一次，防止大屏情况下，视频数量不足以撑出滚动条
-    await this.handleScroll()
-    while (bottomDistance < 800 && this.hasMore) {
-      await this.handleScroll()
+    await handleScroll()
+    while (bottomDistance < 800 && hasMore) {
+      await handleScroll()
     }
-  },
-  beforeUnmount() {
-    document.removeEventListener('mousemove', this.handleMouseMove)
-    document.removeEventListener('mouseout', this.handleMouseOut)
-    window.removeEventListener('scroll', this.handleScroll)
-  },
-}
+  }
+})
+
+onBeforeUnmount(() => {
+  document.removeEventListener('mousemove', handleMouseMove)
+  document.removeEventListener('mouseout', handleMouseOut)
+  window.removeEventListener('scroll', handleScroll)
+})
 </script>
 
 <style scoped>
@@ -1145,7 +1058,7 @@ header .window-cover {
     grid-template-columns: repeat(4, 1fr);
   }
 
-  .container > *:nth-of-type(n + 6) {
+  .container>*:nth-of-type(n + 6) {
     margin-top: 40px;
   }
 
@@ -1160,7 +1073,7 @@ header .window-cover {
     grid-template-columns: repeat(5, 1fr);
   }
 
-  .container > *:nth-of-type(n + 8) {
+  .container>*:nth-of-type(n + 8) {
     margin-top: 40px;
   }
 }
