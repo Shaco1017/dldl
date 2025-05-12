@@ -2,8 +2,13 @@
   <div class="header-bar" :class="isFixHeaderBar ? 'slide-down' : ''">
     <!-- 左边 -->
     <div class="left-entry">
-      <div class="entry-title" v-if="isFixHeaderBar" @mouseenter="isOpen = true" @mouseleave="isOpen = false"
-        @click="this.$router.push('/')">
+      <div
+        class="entry-title"
+        v-if="isFixHeaderBar"
+        @mouseenter="isOpen = true"
+        @mouseleave="isOpen = false"
+        @click="this.$router.push('/')"
+      >
         <picture class="logo">
           <img src="@\assets\image\public_img\logo.png" alt="" />
         </picture>
@@ -38,14 +43,29 @@
     <div class="center-search-container" :style="isShowSearchInput ? '' : 'display: none;'">
       <div class="center-search__bar" :class="isSearchPopShow ? 'is-focus' : ''">
         <!-- 输入框 -->
-        <div id="nav-searchform" :class="isSearchPopShow ? 'nav-searchform-active' : ''" ref="searchForm">
+        <div
+          id="nav-searchform"
+          :class="isSearchPopShow ? 'nav-searchform-active' : ''"
+          ref="searchForm"
+        >
           <div class="nav-search-content">
-            <el-input class="nav-search-input" :class="isSearchPopShow ? 'nav-search-input-active' : ''"
-              v-model="searchInput" placeholder="请输入搜索内容" @focus="searchPopShow()" @keyup.enter="goSearch"
-              @input="handleInput" @compositionstart="isComposite = true" @compositionend="compositionend"></el-input>
+            <el-input
+              class="nav-search-input"
+              :class="isSearchPopShow ? 'nav-search-input-active' : ''"
+              v-model="searchInput"
+              placeholder="请输入搜索内容"
+              @focus="searchPopShow()"
+              @keyup.enter="goSearch"
+              @input="handleInput"
+              @compositionstart="isComposite = true"
+              @compositionend="compositionend"
+            ></el-input>
           </div>
-          <div class="nav-search-clean" :style="searchInput == '' ? 'display: none;' : ''"
-            @click.stop="searchInput = ''">
+          <div
+            class="nav-search-clean"
+            :style="searchInput == '' ? 'display: none;' : ''"
+            @click.stop="searchInput = ''"
+          >
             <!-- <i class="iconfont icon-close"></i> -->
             <el-icon size="16">
               <CircleCloseFilled />
@@ -62,7 +82,10 @@
               <div class="title">搜索历史</div>
               <div class="clear" @click.stop="removeAllHistories">清空</div>
             </div>
-            <div class="histories-wrap" :style="isHistoryOpen ? 'max-height: 171px;' : 'max-height: 91px;'">
+            <div
+              class="histories-wrap"
+              :style="isHistoryOpen ? 'max-height: 171px;' : 'max-height: 91px;'"
+            >
               <div class="histories">
                 <div class="history-item" v-for="(item, index) in histories" :key="index">
                   <div class="history-text" @click.stop="clickItemToSearch(item)">
@@ -76,7 +99,10 @@
             </div>
             <div class="history-fold" v-if="isHistoryOpen" @click.stop="isHistoryOpen = false">
               <div class="fold-text">收起</div>
-              <i class="iconfont icon-xiajiantou" style="transform: rotate(180deg); /* 旋转 180 度 */"></i>
+              <i
+                class="iconfont icon-xiajiantou"
+                style="transform: rotate(180deg); /* 旋转 180 度 */"
+              ></i>
             </div>
             <div class="history-fold" v-else @click.stop="isHistoryOpen = true">
               <div class="fold-text">展开更多</div>
@@ -89,58 +115,99 @@
             </div>
             <div class="trendings-double" v-if="screenWidth >= 1450">
               <div class="trendings-col" style="max-width: calc(50% - 5px)">
-                <div class="trending-item" v-for="(item, index) in this.$store.state.trendings.filter(
-                  (itm, idx) => idx % 2 === 0,
-                )" :key="index">
+                <div
+                  class="trending-item"
+                  v-for="(item, index) in this.$store.state.trendings.filter(
+                    (itm, idx) => idx % 2 === 0,
+                  )"
+                  :key="index"
+                >
                   <div class="trending-wrap" @click.stop="clickItemToSearch(item.content)">
                     <div class="trendings-rank" :class="index < 2 ? 'topThree' : ''">
                       {{ index * 2 + 1 }}
                     </div>
                     <div class="trendings-text">{{ item.content }}</div>
-                    <img src="@/assets/image/public_img/icon_new.png" alt="" class="trending-mark"
-                      v-if="item.type === 1" />
-                    <img src="@/assets/image/public_img/icon_hot.png" alt="" class="trending-mark"
-                      v-if="item.type === 2" />
+                    <img
+                      src="@/assets/image/public_img/icon_new.png"
+                      alt=""
+                      class="trending-mark"
+                      v-if="item.type === 1"
+                    />
+                    <img
+                      src="@/assets/image/public_img/icon_hot.png"
+                      alt=""
+                      class="trending-mark"
+                      v-if="item.type === 2"
+                    />
                   </div>
                 </div>
               </div>
               <div class="trendings-col" style="max-width: calc(50% - 5px)">
-                <div class="trending-item" v-for="(item, index) in this.$store.state.trendings.filter(
-                  (itm, idx) => idx % 2 !== 0,
-                )" :key="index">
+                <div
+                  class="trending-item"
+                  v-for="(item, index) in this.$store.state.trendings.filter(
+                    (itm, idx) => idx % 2 !== 0,
+                  )"
+                  :key="index"
+                >
                   <div class="trending-wrap" @click.stop="clickItemToSearch(item.content)">
                     <div class="trendings-rank" :class="index < 1 ? 'topThree' : ''">
                       {{ index * 2 + 2 }}
                     </div>
                     <div class="trendings-text">{{ item.content }}</div>
-                    <img src="@/assets/image/public_img/icon_new.png" alt="" class="trending-mark"
-                      v-if="item.type === 1" />
-                    <img src="@/assets/image/public_img/icon_hot.png" alt="" class="trending-mark"
-                      v-if="item.type === 2" />
+                    <img
+                      src="@/assets/image/public_img/icon_new.png"
+                      alt=""
+                      class="trending-mark"
+                      v-if="item.type === 1"
+                    />
+                    <img
+                      src="@/assets/image/public_img/icon_hot.png"
+                      alt=""
+                      class="trending-mark"
+                      v-if="item.type === 2"
+                    />
                   </div>
                 </div>
               </div>
             </div>
             <div class="trendings-double" v-else>
               <div class="trendings-col" style="margin-right: unset">
-                <div class="trending-item" v-for="(item, index) in this.$store.state.trendings" :key="index">
+                <div
+                  class="trending-item"
+                  v-for="(item, index) in this.$store.state.trendings"
+                  :key="index"
+                >
                   <div class="trending-wrap" @click.stop="clickItemToSearch(item.content)">
                     <div class="trendings-rank" :class="index < 3 ? 'topThree' : ''">
                       {{ index + 1 }}
                     </div>
                     <div class="trendings-text">{{ item.content }}</div>
-                    <img src="@/assets/image/public_img/icon_new.png" alt="" class="trending-mark"
-                      v-if="item.type === 1" />
-                    <img src="@/assets/image/public_img/icon_hot.png" alt="" class="trending-mark"
-                      v-if="item.type === 2" />
+                    <img
+                      src="@/assets/image/public_img/icon_new.png"
+                      alt=""
+                      class="trending-mark"
+                      v-if="item.type === 1"
+                    />
+                    <img
+                      src="@/assets/image/public_img/icon_hot.png"
+                      alt=""
+                      class="trending-mark"
+                      v-if="item.type === 2"
+                    />
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="suggestions" v-if="searchInput != ''">
-            <div class="suggest-item" v-for="(item, index) in matchingWord" :key="index" v-html="highlightKeyword(item)"
-              @click.stop="clickItemToSearch(item)"></div>
+            <div
+              class="suggest-item"
+              v-for="(item, index) in matchingWord"
+              :key="index"
+              v-html="highlightKeyword(item)"
+              @click.stop="clickItemToSearch(item)"
+            ></div>
           </div>
         </div>
       </div>
@@ -152,16 +219,33 @@
         <div class="default-login" @click="dialogVisible = true">登录</div>
       </div>
       <!-- 登录后显示头像 -->
-      <div v-else class="header-avatar-wrap" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
-        <a :href="`/space/${user.uid}`" target="_blank" class="header-avatar-wrap--container mini-avatar--small">
+      <div
+        v-else
+        class="header-avatar-wrap"
+        @mouseenter="handleMouseEnter"
+        @mouseleave="handleMouseLeave"
+      >
+        <a
+          :href="`/space/${user.uid}`"
+          target="_blank"
+          class="header-avatar-wrap--container mini-avatar--small"
+        >
           <picture class="v-img">
             <img :src="user.avatar_url" :alt="`${user.nickname}的头像`" />
           </picture>
         </a>
         <div class="v-popover to-bottom">
-          <div class="avatar-panel-popover" :class="isPopoverShow ? 'popShow' : 'popHide'"
-            :style="{ display: popoverDisplay }">
-            <a :href="`/space/${user.uid}`" target="_blank" class="nickname" :class="user.vip !== 0 ? 'vip-name' : ''">
+          <div
+            class="avatar-panel-popover"
+            :class="isPopoverShow ? 'popShow' : 'popHide'"
+            :style="{ display: popoverDisplay }"
+          >
+            <a
+              :href="`/space/${user.uid}`"
+              target="_blank"
+              class="nickname"
+              :class="user.vip !== 0 ? 'vip-name' : ''"
+            >
               <span>{{ user.nickname }}</span>
             </a>
             <div class="vip-level-tag">
@@ -251,8 +335,10 @@
             <div class="red-num--dynamic" v-if="user.uid && msgUnread > 0">
               {{ msgUnread > 99 ? '99+' : msgUnread }}
             </div>
-            <div class="right-entry--outside"
-              @click="this.$store.state.isLogin ? openNewPage('/message') : (dialogVisible = true)">
+            <div
+              class="right-entry--outside"
+              @click="this.$store.state.isLogin ? openNewPage('/message') : (dialogVisible = true)"
+            >
               <i class="iconfont icon-xinfeng"></i>
               <span>消息</span>
             </div>
@@ -264,31 +350,41 @@
                   回复我的
                   <span class="notify-number" v-if="this.$store.state.msgUnread[0] > 0">
                     {{
-                      this.$store.state.msgUnread[0] <= 99 ? this.$store.state.msgUnread[0] : '99+' }} </span>
+                      this.$store.state.msgUnread[0] <= 99 ? this.$store.state.msgUnread[0] : '99+'
+                    }}
+                  </span>
                 </div>
                 <div class="message-inner-list__item" @click="openNewPage('/message/at')">
                   @ 我的
                   <span class="notify-number" v-if="this.$store.state.msgUnread[1] > 0">
                     {{
-                      this.$store.state.msgUnread[1] <= 99 ? this.$store.state.msgUnread[1] : '99+' }} </span>
+                      this.$store.state.msgUnread[1] <= 99 ? this.$store.state.msgUnread[1] : '99+'
+                    }}
+                  </span>
                 </div>
                 <div class="message-inner-list__item" @click="openNewPage('/message/love')">
                   收到的赞
                   <span class="notify-number" v-if="this.$store.state.msgUnread[2] > 0">
                     {{
-                      this.$store.state.msgUnread[2] <= 99 ? this.$store.state.msgUnread[2] : '99+' }} </span>
+                      this.$store.state.msgUnread[2] <= 99 ? this.$store.state.msgUnread[2] : '99+'
+                    }}
+                  </span>
                 </div>
                 <div class="message-inner-list__item" @click="openNewPage('/message/system')">
                   系统消息
                   <span class="notify-number" v-if="this.$store.state.msgUnread[3] > 0">
                     {{
-                      this.$store.state.msgUnread[3] <= 99 ? this.$store.state.msgUnread[3] : '99+' }} </span>
+                      this.$store.state.msgUnread[3] <= 99 ? this.$store.state.msgUnread[3] : '99+'
+                    }}
+                  </span>
                 </div>
                 <div class="message-inner-list__item" @click="openNewPage('/message/whisper')">
                   我的消息
                   <span class="notify-number" v-if="this.$store.state.msgUnread[4] > 0">
                     {{
-                      this.$store.state.msgUnread[4] <= 99 ? this.$store.state.msgUnread[4] : '99+' }} </span>
+                      this.$store.state.msgUnread[4] <= 99 ? this.$store.state.msgUnread[4] : '99+'
+                    }}
+                  </span>
                 </div>
               </div>
             </div>
@@ -302,7 +398,10 @@
       <div class="v-popover-wrap">
         <VPopover pop-style="padding-top: 17px;">
           <template #reference>
-            <div class="right-entry--outside" @click="this.$store.state.isLogin ? noPage() : (dialogVisible = true)">
+            <div
+              class="right-entry--outside"
+              @click="this.$store.state.isLogin ? noPage() : (dialogVisible = true)"
+            >
               <i class="iconfont icon-fengche"></i>
               <span>动态</span>
             </div>
@@ -317,12 +416,18 @@
         </VPopover>
       </div>
       <div class="v-popover-wrap">
-        <VPopover :pop-style="this.$store.state.isLogin
-          ? 'padding-top: 17px; margin-left: -100px;'
-          : 'padding-top: 17px;'
-          ">
+        <VPopover
+          :pop-style="
+            this.$store.state.isLogin
+              ? 'padding-top: 17px; margin-left: -100px;'
+              : 'padding-top: 17px;'
+          "
+        >
           <template #reference>
-            <div class="right-entry--outside" @click="this.$store.state.isLogin ? noPage() : (dialogVisible = true)">
+            <div
+              class="right-entry--outside"
+              @click="this.$store.state.isLogin ? noPage() : (dialogVisible = true)"
+            >
               <i class="iconfont icon-shoucang"></i>
               <span>收藏</span>
             </div>
@@ -337,12 +442,18 @@
         </VPopover>
       </div>
       <div class="v-popover-wrap">
-        <VPopover :pop-style="this.$store.state.isLogin
-          ? 'padding-top: 17px; margin-left: -50px;'
-          : 'padding-top: 17px;'
-          ">
+        <VPopover
+          :pop-style="
+            this.$store.state.isLogin
+              ? 'padding-top: 17px; margin-left: -50px;'
+              : 'padding-top: 17px;'
+          "
+        >
           <template #reference>
-            <div class="right-entry--outside" @click="this.$store.state.isLogin ? noPage() : (dialogVisible = true)">
+            <div
+              class="right-entry--outside"
+              @click="this.$store.state.isLogin ? noPage() : (dialogVisible = true)"
+            >
               <i class="iconfont icon-lishijilu"></i>
               <span>历史</span>
             </div>
@@ -356,16 +467,21 @@
           </template>
         </VPopover>
       </div>
-      <div class="right-entry-item"
-        @click="this.$store.state.isLogin ? openNewPage('/platform') : (dialogVisible = true)">
+      <div
+        class="right-entry-item"
+        @click="this.$store.state.isLogin ? openNewPage('/platform') : (dialogVisible = true)"
+      >
         <div class="right-entry--outside">
           <i class="iconfont icon-dengpao"></i>
           <span>创作中心</span>
         </div>
       </div>
-      <div class="right-entry-item right-entry-item--upload" @click="
-        this.$store.state.isLogin ? openNewPage('/platform/upload') : (dialogVisible = true)
-        ">
+      <div
+        class="right-entry-item right-entry-item--upload"
+        @click="
+          this.$store.state.isLogin ? openNewPage('/platform/upload') : (dialogVisible = true)
+        "
+      >
         <div class="upload-buttom">
           <i class="iconfont icon-shangchuan"></i>
           <span>投稿</span>
@@ -1526,7 +1642,6 @@ export default {
 
 /* 跳动效果 */
 @keyframes jump {
-
   0%,
   100% {
     transform: translateY(0);
