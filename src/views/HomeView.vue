@@ -345,7 +345,7 @@ async function getCumulativeVideos() {
   let ids = vids.value.join(",");  // 用逗号连接成一个字符串
   cumulativeVideos.value.push([]);
   vids.value.push([]);
-  hasMore.value = false;
+  hasMore.value = true;
   // console.log(this.cumulativeVideos);
   loadingMore.value = false;
 }
@@ -370,10 +370,12 @@ async function handleScroll() {
   } else if (rootEl.value.scrollTop < headerHight && isFixChannel.value) {
     isFixChannel.value = false;
   }
-
+  console.log(bottomDistance.value)
   // 当距离底部小于800且有更多数据时触发加载数据的函数
-  if (bottomDistance.value < 800 && hasMore && !loadingMore) {
+  if (bottomDistance.value < 800 && hasMore.value && !loadingMore.value) {
     await getCumulativeVideos();
+    console.log('jiazaishipin')
+    
   }
 }
 
@@ -383,10 +385,10 @@ onMounted(async () => {
     headerHight.value = document.querySelector('.main__layout').offsetTop
     window.addEventListener('scroll', handleScroll)
     // 初次挂载时执行一次，防止大屏情况下，视频数量不足以撑出滚动条
-    await handleScroll()
-    while (bottomDistance.value < 800 && hasMore.value) {
-      await handleScroll()
-    }
+    // await handleScroll()
+    // while (bottomDistance.value < 800 && hasMore.value) {
+    //   await handleScroll()
+    // }
   }
 })
 

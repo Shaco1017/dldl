@@ -4,19 +4,20 @@
   </div>
 </template>
 
-<script setup>
+<!-- <script setup>
 import { onMounted, ref } from 'vue';
 const rootEl = ref(document.documentElement)
 onMounted(async() => {
   console.log(rootEl.value.scrollTop)
 })
-</script>
+</script> -->
 
-<!-- <script>
+<script>
 export default {
   async mounted() {
+
     this.el = document.documentElement
-    console.log(this.el)
+    console.log(document.querySelector('.large_header').offsetTop)
   }
 }
-</script> -->
+</script>
