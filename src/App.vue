@@ -5,3 +5,7 @@ import { RouterLink, RouterView } from 'vue-router'
 <template>
   <RouterView />
 </template>
+
+<!-- <template>
+  <div>测试页面</div>
+</template> -->

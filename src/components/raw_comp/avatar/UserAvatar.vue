@@ -27,7 +27,7 @@
 
 
 <script setup>
-import { defineProps, ref } from 'vue';
+import { ref } from 'vue';
 defineProps({
   // 头像的大小 有效值 24 30 34 36 40 48 50 60 86
   size: {

@@ -16,14 +16,15 @@
 <script setup>
 import { onMounted, onBeforeUnmount, ref } from 'vue';
 
-let inTimer;  // 节流计时器
+// 节流计时器
+let inTimer;
 // let outTimer;
 
 // 气泡框的显隐
 let popoverDisplay = ref("none")
 let isPopoverShow = ref(false)
 
-let data = defineProps({
+const data = defineProps({
     // 显示方向
     placement: {
         type: String,
@@ -35,7 +36,7 @@ let data = defineProps({
     trigger: {
         type: String,
         default() {
-            return "click"
+            return "hover"
         }
     },
     popStyle: {
@@ -48,23 +49,22 @@ let data = defineProps({
 })
 
 function show() {
-    popoverDisplay = ""
-    isPopoverShow = true
+    popoverDisplay.value = ""
+    isPopoverShow.value = true
 }
 
 function hide() {
-    isPopoverShow = false;
+    isPopoverShow.value = false;
     setTimeout(() => {
-        popoverDisplay = "none";
+        popoverDisplay.value = "none";
     }, 300)
 }
 
-const vPopRef = ref()
-const vPopCon = ref()
-
+const vPopRef = ref(null)
+const vPopCon = ref(null)
 // 点击空白处关闭气泡
 function handleOutsideClick(event) {
-    if (!vPopRef.contains(event.target) && !vPopCon.contains(event.target)) {
+    if (!vPopRef.value.contains(event.target) && !vPopCon.value.contains(event.target)) {
         hide();
     }
 }
@@ -105,8 +105,6 @@ function handleClick() {
         }
     }
 }
-
-
 
 </script>
 

@@ -5,10 +5,7 @@
       <div class="channel-icons__item">
         <div class="icon-bg icon-bg__dynamic">
           <picture class="v-img icon-bg--up" v-if="dynamicPic">
-            <img
-              src="https://cdn.acwing.com/media/user/profile/photo/240972_md_e16c066264.jpg"
-              alt=""
-            />
+            <img src="@\assets\image\card_img.jpg" alt="" />
           </picture>
           <i class="iconfont icon-fengche" v-else></i>
         </div>
@@ -24,68 +21,17 @@
     <!-- 右边 -->
     <div class="right-channel-container">
       <!-- 中间频道 -->
-      <div class="channel-items__left" v-if="channels.length != 0">
-        <!-- 番剧 -->
-        <VPopover class="channel-link" placement="top" popStyle="z-index: 2000; cursor: default;">
-          <template #reference>
-            <div @click="openNewPage(`/v/${channels[0].mcId}`)">
-              <span>{{ channels[0].mcName }}</span>
-            </div>
-          </template>
-          <template #content>
-            <div class="channel-children-container">
-              <div
-                class="sub-item"
-                v-for="subIndex in Math.ceil(channels[0].scList.length / 4)"
-                :key="subIndex"
-              >
-                <div
-                  @click="openNewPage(`/v/${child.mcId}/${child.scId}`)"
-                  class="channel-children"
-                  v-for="(child, chIndex) in channels[0].scList.slice(
-                    (subIndex - 1) * 4,
-                    subIndex * 4,
-                  )"
-                  :key="chIndex"
-                >
-                  {{ child.scName }}
-                </div>
-              </div>
-            </div>
-          </template>
-        </VPopover>
+      <!-- <div class="channel-items__left" v-if="channels.length != 0"> -->
+      <div class="channel-items__left">
+        <div class="channel-link" @click="openNewPage(`/movie`)">
+          <span>番剧</span>
+        </div>
         <div class="channel-link" @click="openNewPage(`/movie`)">
           <span>电影</span>
         </div>
-        <!-- 国创 -->
-        <VPopover class="channel-link" placement="top" popStyle="z-index: 2000; cursor: default;">
-          <template #reference>
-            <div @click="openNewPage(`/v/${channels[1].mcId}`)">
-              <span>{{ channels[1].mcName }}</span>
-            </div>
-          </template>
-          <template #content>
-            <div class="channel-children-container">
-              <div
-                class="sub-item"
-                v-for="subIndex in Math.ceil(channels[1].scList.length / 4)"
-                :key="subIndex"
-              >
-                <div
-                  @click="openNewPage(`/v/${child.mcId}/${child.scId}`)"
-                  class="channel-children"
-                  v-for="(child, chIndex) in channels[1].scList.slice(
-                    (subIndex - 1) * 4,
-                    subIndex * 4,
-                  )"
-                  :key="chIndex"
-                >
-                  {{ child.scName }}
-                </div>
-              </div>
-            </div>
-          </template>
-        </VPopover>
+        <div class="channel-link" @click="openNewPage(`/movie`)">
+          <span>国创</span>
+        </div>
         <div class="channel-link" @click="openNewPage(`/tv`)">
           <span>电视剧</span>
         </div>
@@ -95,38 +41,6 @@
         <div class="channel-link" @click="openNewPage(`/documentary`)">
           <span>记录片</span>
         </div>
-        <!-- 将剩下的遍历出来 -->
-        <VPopover
-          class="channel-link"
-          v-for="(item, index) in channels.slice(2)"
-          :key="index"
-          :placement="index % 2 == 0 ? 'top' : 'bottom'"
-          popStyle="z-index: 2000; cursor: default;"
-        >
-          <template #reference>
-            <div @click="openNewPage(`/v/${item.mcId}`)">
-              <span>{{ item.mcName }}</span>
-            </div>
-          </template>
-          <template #content>
-            <div class="channel-children-container">
-              <div
-                class="sub-item"
-                v-for="subIndex in Math.ceil(item.scList.length / 4)"
-                :key="subIndex"
-              >
-                <div
-                  @click="openNewPage(`/v/${child.mcId}/${child.scId}`)"
-                  class="channel-children"
-                  v-for="(child, chIndex) in item.scList.slice((subIndex - 1) * 4, subIndex * 4)"
-                  :key="chIndex"
-                >
-                  {{ child.scName }}
-                </div>
-              </div>
-            </div>
-          </template>
-        </VPopover>
         <div class="channel-link" @click="openNewPage(`/v/life/daily`)">
           <span>VLOG</span>
         </div>
@@ -142,12 +56,40 @@
         <div class="channel-link" @click="openNewPage(`/mooc`)">
           <span>公开课</span>
         </div>
-        <VPopover
-          placement="bottom"
-          popStyle="z-index: 2000;"
-          @mouseenter="isOpen = true"
-          @mouseleave="isOpen = false"
-        >
+        <div class="channel-link" @click="openNewPage(`/movie`)">
+          <span>番剧</span>
+        </div>
+        <div class="channel-link" @click="openNewPage(`/movie`)">
+          <span>电影</span>
+        </div>
+        <div class="channel-link" @click="openNewPage(`/movie`)">
+          <span>国创</span>
+        </div>
+        <div class="channel-link" @click="openNewPage(`/tv`)">
+          <span>电视剧</span>
+        </div>
+        <div class="channel-link" @click="openNewPage(`/variety`)">
+          <span>综艺</span>
+        </div>
+        <div class="channel-link" @click="openNewPage(`/documentary`)">
+          <span>记录片</span>
+        </div>
+        <div class="channel-link" @click="openNewPage(`/v/life/daily`)">
+          <span>VLOG</span>
+        </div>
+        <div class="channel-link" @click="openNewPage(`/v/life/funny`)">
+          <span>搞笑</span>
+        </div>
+        <div class="channel-link" @click="openNewPage(`/v/game/stand_alone`)">
+          <span>单机游戏</span>
+        </div>
+        <div class="channel-link" @click="openNewPage(`/love`)">
+          <span>公益</span>
+        </div>
+        <div class="channel-link" @click="openNewPage(`/mooc`)">
+          <span>公开课</span>
+        </div>
+        <VPopover placement="bottom" popStyle="z-index: 2000;" @mouseenter="isOpen = true" @mouseleave="isOpen = false">
           <template #reference>
             <div id="channel-entry-more" class="channel-entry-more__link">
               <span style="margin-left: -8px">更多</span>
@@ -156,34 +98,37 @@
           </template>
           <template #content>
             <div class="more-channel-popover__wrap">
-              <div class="more-channel"></div>
-              <div class="more-channel"></div>
-              <div class="more-channel"></div>
-              <div class="more-channel"></div>
-              <div class="more-channel"></div>
-              <div class="more-channel"></div>
-              <!-- 前面的是占位符，反正也展示不出来的 -->
-              <div
-                class="more-channel"
-                v-for="(item, index) in channels.slice(2)"
-                :key="index"
-                @click="openNewPage(`/v/${item.mcId}`)"
-              >
-                {{ item.mcName }}
+              <div class="channel-link" @click="openNewPage(`/movie`)">
+                <span>番剧</span>
               </div>
-              <div class="more-channel" @click="openNewPage(`/v/life/daily`)">
+              <div class="channel-link" @click="openNewPage(`/movie`)">
+                <span>电影</span>
+              </div>
+              <div class="channel-link" @click="openNewPage(`/movie`)">
+                <span>国创</span>
+              </div>
+              <div class="channel-link" @click="openNewPage(`/tv`)">
+                <span>电视剧</span>
+              </div>
+              <div class="channel-link" @click="openNewPage(`/variety`)">
+                <span>综艺</span>
+              </div>
+              <div class="channel-link" @click="openNewPage(`/documentary`)">
+                <span>记录片</span>
+              </div>
+              <div class="channel-link" @click="openNewPage(`/v/life/daily`)">
                 <span>VLOG</span>
               </div>
-              <div class="more-channel" @click="openNewPage(`/v/life/funny`)">
+              <div class="channel-link" @click="openNewPage(`/v/life/funny`)">
                 <span>搞笑</span>
               </div>
-              <div class="more-channel" @click="openNewPage(`/v/game/stand_alone`)">
+              <div class="channel-link" @click="openNewPage(`/v/game/stand_alone`)">
                 <span>单机游戏</span>
               </div>
-              <div class="more-channel" @click="openNewPage(`/love`)">
+              <div class="channel-link" @click="openNewPage(`/love`)">
                 <span>公益</span>
               </div>
-              <div class="more-channel" @click="openNewPage(`/mooc`)">
+              <div class="channel-link" @click="openNewPage(`/mooc`)">
                 <span>公开课</span>
               </div>
             </div>
@@ -221,34 +166,25 @@
   </div>
 </template>
 
-<script>
-import VPopover from './raw_comp/popover/VPopover.vue'
 
-export default {
-  name: 'HeaderChannel',
-  components: {
-    VPopover,
-  },
-  data() {
-    return {
-      // 是否有新动态以显示其头像，后面可改成获取动态详情
-      dynamicPic: false,
-      // 是否展开显示更多频道
-      isOpen: false,
-    }
-  },
-  computed: {
-    // 频道列表
-    channels() {
-      return this.$store.state.channels
-    },
-  },
-  methods: {
-    // 打开新标签页
-    openNewPage(route) {
-      window.open(this.$router.resolve(route).href, '_blank')
-    },
-  },
+<script setup>
+import { computed, ref } from 'vue'
+
+import store from '@/store'
+import router from '@/router'
+
+import VPopover from './raw_comp/popover/VPopover.vue'
+// 是否有新动态以显示其头像，后面可改成获取动态详情
+let dynamicPic = ref(false)
+// 是否展开显示更多频道
+let isOpen = ref(false)
+
+const channels = computed(() => {
+  return store.state.channels
+})
+// 打开新标签页
+function openNewPage(route) {
+  window.open(router.resolve(route).href, '_blank')
 }
 </script>
 
@@ -398,7 +334,7 @@ export default {
   border-radius: 50%;
 }
 
-.icon-bg--up > img {
+.icon-bg--up>img {
   border-radius: 50%;
 }
 
@@ -453,12 +389,16 @@ export default {
 
 .channel-items__left {
   position: relative;
-  display: grid; /* 网格布局 */
+  display: grid;
+  /* 网格布局 */
   width: 100%;
   grid-auto-flow: column;
-  grid-column: span 4; /* 元素应该跨越4个网格列 */
-  grid-gap: 10px; /* 子元素之间的间隔 */
-  grid-template-rows: repeat(2, 1fr); /* 有两行，每行的高度是 1fr，表示等分可用高度 */
+  grid-column: span 4;
+  /* 元素应该跨越4个网格列 */
+  grid-gap: 10px;
+  /* 子元素之间的间隔 */
+  grid-template-rows: repeat(2, 1fr);
+  /* 有两行，每行的高度是 1fr，表示等分可用高度 */
   border-right: 1px solid var(--line_regular);
 }
 
@@ -554,6 +494,7 @@ export default {
 }
 
 @media (max-width: 1099.9px) {
+
   .channel-link,
   .channel-entry-more__link {
     font-size: 13px;
@@ -562,11 +503,13 @@ export default {
   }
 
   .channel-link:nth-of-type(1n + 18) {
-    display: none !important; /* 第18个元素及之后的隐藏 */
+    display: none !important;
+    /* 第18个元素及之后的隐藏 */
   }
 }
 
 @media (min-width: 1100px) and (max-width: 1366.9px) {
+
   .channel-link,
   .channel-entry-more__link {
     font-size: 13px;
@@ -575,11 +518,13 @@ export default {
   }
 
   .channel-link:nth-of-type(1n + 18) {
-    display: none !important; /* 第18个元素及之后的隐藏 */
+    display: none !important;
+    /* 第18个元素及之后的隐藏 */
   }
 }
 
 @media (min-width: 1367px) and (max-width: 1700.9px) {
+
   .channel-link,
   .channel-entry-more__link {
     font-size: 14px;
@@ -588,11 +533,13 @@ export default {
   }
 
   .channel-link:nth-of-type(1n + 22) {
-    display: none !important; /* 第22个元素及之后的隐藏 */
+    display: none !important;
+    /* 第22个元素及之后的隐藏 */
   }
 }
 
 @media (min-width: 1701px) and (max-width: 2199.9px) {
+
   .channel-link,
   .channel-entry-more__link {
     font-size: 14px;
@@ -601,11 +548,13 @@ export default {
   }
 
   .channel-link:nth-of-type(1n + 24) {
-    display: none !important; /* 第24个元素及之后的隐藏 */
+    display: none !important;
+    /* 第24个元素及之后的隐藏 */
   }
 }
 
 @media (min-width: 2200px) {
+
   .channel-link,
   .channel-entry-more__link {
     font-size: 15px;
@@ -654,7 +603,21 @@ export default {
 }
 
 .more-channel-popover__wrap {
+
   padding: 8px 16px;
+
+  /* position: relative; */
+  /* display: grid; */
+  /* 网格布局 */
+  /* width: 100%; */
+  /* grid-auto-flow: column; */
+  /* grid-column: span 4; */
+  /* 元素应该跨越4个网格列 */
+  /* grid-gap: 10px; */
+  /* 子元素之间的间隔 */
+  /* grid-template-rows: repeat(2, 1fr); */
+  /* 有两行，每行的高度是 1fr，表示等分可用高度 */
+  /* border-right: 1px solid var(--line_regular); */
 }
 
 @media (min-width: 1701px) and (max-width: 2199.9px) {
@@ -673,29 +636,6 @@ export default {
   }
 }
 
-@media (max-width: 1366.9px) {
-  .more-channel-popover__wrap > *:nth-of-type(-1n + 17) {
-    display: none !important; /* 前17个隐藏 */
-  }
-}
-
-@media (min-width: 1367px) and (max-width: 1700.9px) {
-  .more-channel-popover__wrap > *:nth-of-type(-1n + 21) {
-    display: none !important; /* 前21个隐藏 */
-  }
-}
-
-@media (min-width: 1701px) and (max-width: 2199.9px) {
-  .more-channel-popover__wrap > *:nth-of-type(-1n + 23) {
-    display: none !important; /* 前23个隐藏 */
-  }
-}
-
-@media (min-width: 2200px) {
-  .more-channel-popover__wrap > * {
-    display: none !important; /* 全部隐藏 */
-  }
-}
 
 .channel-items__right {
   grid-column: span 1;

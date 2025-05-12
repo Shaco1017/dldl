@@ -2,39 +2,33 @@
   <div class="header-bar" :class="isFixHeaderBar ? 'slide-down' : ''">
     <!-- 左边 -->
     <div class="left-entry">
-      <div
-        class="entry-title"
-        v-if="isFixHeaderBar"
-        @mouseenter="isOpen = true"
-        @mouseleave="isOpen = false"
-        @click="this.$router.push('/')"
-      >
+      <div class="entry-title" v-if="isFixHeaderBar" @mouseenter="isOpen = true" @mouseleave="isOpen = false" @click="">
         <picture class="logo">
           <img src="@\assets\image\public_img\logo.png" alt="" />
         </picture>
         <span>首页</span>
         <i class="iconfont icon-xiajiantou" :class="isOpen ? 'arrow-down' : ''"></i>
       </div>
-      <div class="entry-title" v-else @click="this.$router.push('/')">
+      <div class="entry-title" v-else @click="">
         <i class="iconfont icon-dianshi"></i>
         <span>首页</span>
       </div>
-      <div class="default-entry" @click="noPage">
+      <div class="default-entry" @click="">
         <span>番剧</span>
       </div>
-      <div class="default-entry" @click="noPage">
+      <div class="default-entry" @click="">
         <span>漫画</span>
       </div>
-      <div class="default-entry" @click="noPage">
+      <div class="default-entry" @click="">
         <span>直播</span>
       </div>
-      <div class="default-entry" @click="noPage">
+      <div class="default-entry" @click="">
         <span>游戏中心</span>
       </div>
-      <div class="default-entry" @click="noPage">
+      <div class="default-entry" @click="">
         <span>会员购</span>
       </div>
-      <div class="download-entry" @click="noPage" v-if="!isFixHeaderBar">
+      <div class="download-entry" @click="" v-if="!isFixHeaderBar">
         <i class="iconfont icon-xiazai"></i>
         <span>下载客户端</span>
       </div>
@@ -43,33 +37,10 @@
     <div class="center-search-container" :style="isShowSearchInput ? '' : 'display: none;'">
       <div class="center-search__bar" :class="isSearchPopShow ? 'is-focus' : ''">
         <!-- 输入框 -->
-        <div
-          id="nav-searchform"
-          :class="isSearchPopShow ? 'nav-searchform-active' : ''"
-          ref="searchForm"
-        >
+        <div id="nav-searchform" :class="isSearchPopShow ? 'nav-searchform-active' : ''" ref="searchForm">
           <div class="nav-search-content">
-            <el-input
-              class="nav-search-input"
-              :class="isSearchPopShow ? 'nav-search-input-active' : ''"
-              v-model="searchInput"
-              placeholder="请输入搜索内容"
-              @focus="searchPopShow()"
-              @keyup.enter="goSearch"
-              @input="handleInput"
-              @compositionstart="isComposite = true"
-              @compositionend="compositionend"
-            ></el-input>
-          </div>
-          <div
-            class="nav-search-clean"
-            :style="searchInput == '' ? 'display: none;' : ''"
-            @click.stop="searchInput = ''"
-          >
-            <!-- <i class="iconfont icon-close"></i> -->
-            <el-icon size="16">
-              <CircleCloseFilled />
-            </el-icon>
+            <el-input class="nav-search-input" :class="isSearchPopShow ? 'nav-search-input-active' : ''"
+              v-model="searchInput" placeholder="请输入搜索内容" @focus="searchPopShow()"></el-input>
           </div>
           <div class="nav-search-btn" @click="goSearch">
             <i class="iconfont icon-sousuo"></i>
@@ -80,31 +51,17 @@
           <div class="history" v-if="searchInput == ''">
             <div class="header">
               <div class="title">搜索历史</div>
-              <div class="clear" @click.stop="removeAllHistories">清空</div>
+              <div class="clear">清空</div>
             </div>
-            <div
-              class="histories-wrap"
-              :style="isHistoryOpen ? 'max-height: 171px;' : 'max-height: 91px;'"
-            >
+            <div class="histories-wrap" :style="isHistoryOpen ? 'max-height: 171px;' : 'max-height: 91px;'">
               <div class="histories">
-                <div class="history-item" v-for="(item, index) in histories" :key="index">
-                  <div class="history-text" @click.stop="clickItemToSearch(item)">
-                    {{ item }}
-                  </div>
-                  <div class="close" @click.stop="removeHistory(index)">
-                    <i class="iconfont icon-close"></i>
-                  </div>
-                </div>
               </div>
             </div>
-            <div class="history-fold" v-if="isHistoryOpen" @click.stop="isHistoryOpen = false">
+            <div class="history-fold" v-if="isHistoryOpen">
               <div class="fold-text">收起</div>
-              <i
-                class="iconfont icon-xiajiantou"
-                style="transform: rotate(180deg); /* 旋转 180 度 */"
-              ></i>
+              <i class="iconfont icon-xiajiantou" style="transform: rotate(180deg); /* 旋转 180 度 */"></i>
             </div>
-            <div class="history-fold" v-else @click.stop="isHistoryOpen = true">
+            <div class="history-fold" v-else>
               <div class="fold-text">展开更多</div>
               <i class="iconfont icon-xiajiantou"></i>
             </div>
@@ -113,101 +70,6 @@
             <div class="header">
               <div class="title">DiLiDiLi热搜</div>
             </div>
-            <div class="trendings-double" v-if="screenWidth >= 1450">
-              <div class="trendings-col" style="max-width: calc(50% - 5px)">
-                <div
-                  class="trending-item"
-                  v-for="(item, index) in this.$store.state.trendings.filter(
-                    (itm, idx) => idx % 2 === 0,
-                  )"
-                  :key="index"
-                >
-                  <div class="trending-wrap" @click.stop="clickItemToSearch(item.content)">
-                    <div class="trendings-rank" :class="index < 2 ? 'topThree' : ''">
-                      {{ index * 2 + 1 }}
-                    </div>
-                    <div class="trendings-text">{{ item.content }}</div>
-                    <img
-                      src="@/assets/image/public_img/icon_new.png"
-                      alt=""
-                      class="trending-mark"
-                      v-if="item.type === 1"
-                    />
-                    <img
-                      src="@/assets/image/public_img/icon_hot.png"
-                      alt=""
-                      class="trending-mark"
-                      v-if="item.type === 2"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="trendings-col" style="max-width: calc(50% - 5px)">
-                <div
-                  class="trending-item"
-                  v-for="(item, index) in this.$store.state.trendings.filter(
-                    (itm, idx) => idx % 2 !== 0,
-                  )"
-                  :key="index"
-                >
-                  <div class="trending-wrap" @click.stop="clickItemToSearch(item.content)">
-                    <div class="trendings-rank" :class="index < 1 ? 'topThree' : ''">
-                      {{ index * 2 + 2 }}
-                    </div>
-                    <div class="trendings-text">{{ item.content }}</div>
-                    <img
-                      src="@/assets/image/public_img/icon_new.png"
-                      alt=""
-                      class="trending-mark"
-                      v-if="item.type === 1"
-                    />
-                    <img
-                      src="@/assets/image/public_img/icon_hot.png"
-                      alt=""
-                      class="trending-mark"
-                      v-if="item.type === 2"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="trendings-double" v-else>
-              <div class="trendings-col" style="margin-right: unset">
-                <div
-                  class="trending-item"
-                  v-for="(item, index) in this.$store.state.trendings"
-                  :key="index"
-                >
-                  <div class="trending-wrap" @click.stop="clickItemToSearch(item.content)">
-                    <div class="trendings-rank" :class="index < 3 ? 'topThree' : ''">
-                      {{ index + 1 }}
-                    </div>
-                    <div class="trendings-text">{{ item.content }}</div>
-                    <img
-                      src="@/assets/image/public_img/icon_new.png"
-                      alt=""
-                      class="trending-mark"
-                      v-if="item.type === 1"
-                    />
-                    <img
-                      src="@/assets/image/public_img/icon_hot.png"
-                      alt=""
-                      class="trending-mark"
-                      v-if="item.type === 2"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="suggestions" v-if="searchInput != ''">
-            <div
-              class="suggest-item"
-              v-for="(item, index) in matchingWord"
-              :key="index"
-              v-html="highlightKeyword(item)"
-              @click.stop="clickItemToSearch(item)"
-            ></div>
           </div>
         </div>
       </div>
@@ -215,74 +77,60 @@
     <!-- 右边 -->
     <div class="right-entry">
       <!-- 未登录状态 -->
-      <div class="header-avatar-wrap" v-if="!this.$store.state.isLogin">
-        <div class="default-login" @click="dialogVisible = true">登录</div>
+      <div class="header-avatar-wrap" v-if="!store.state.isLogin">
+        <div class="default-login" @click="dialogVisible = true;">
+          登录
+        </div>
       </div>
       <!-- 登录后显示头像 -->
-      <div
-        v-else
-        class="header-avatar-wrap"
-        @mouseenter="handleMouseEnter"
-        @mouseleave="handleMouseLeave"
-      >
-        <a
-          :href="`/space/${user.uid}`"
-          target="_blank"
-          class="header-avatar-wrap--container mini-avatar--small"
-        >
+      <div v-else class="header-avatar-wrap" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
+        <!-- 绑定href请求获取`/space/${user.uid}` -->
+        <a :href="`${user.uid}`" target="_blank" class="header-avatar-wrap--container mini-avatar--small">
           <picture class="v-img">
+            <!-- 用户头像 -->
             <img :src="user.avatar_url" :alt="`${user.nickname}的头像`" />
           </picture>
         </a>
         <div class="v-popover to-bottom">
-          <div
-            class="avatar-panel-popover"
-            :class="isPopoverShow ? 'popShow' : 'popHide'"
-            :style="{ display: popoverDisplay }"
-          >
-            <a
-              :href="`/space/${user.uid}`"
-              target="_blank"
-              class="nickname"
-              :class="user.vip !== 0 ? 'vip-name' : ''"
-            >
+          <div class="avatar-panel-popover" :class="isPopoverShow ? 'popShow' : 'popHide'"
+            :style="{ display: popoverDisplay }">
+            <!-- 绑定href请求获取`/space/${user.uid}` -->
+            <a :href="`${user.uid}`" target="_blank" class="nickname" :class="user.vip !== 0 ? 'vip-name' : ''">
               <span>{{ user.nickname }}</span>
             </a>
             <div class="vip-level-tag">
               <div class="vip-tag" v-if="user.vip !== 0">
                 {{ user.vip === 1 ? '月度' : user.vip === 2 ? '季度' : '年度' }}大会员
               </div>
-              <UserAvatar class="level" :level="handleLevel(user.exp)" :size="12"></UserAvatar>
-              <div class="gender female" v-if="user.gender == 0">
-                <el-icon size="12">
+              <div class="gender female" v-if="user.gender == 0"><el-icon size="12">
                   <Female />
-                </el-icon>
-              </div>
-              <div class="gender male" v-if="user.gender == 1">
-                <el-icon size="12">
+                </el-icon></div>
+              <div class="gender male" v-if="user.gender == 1"><el-icon size="12">
                   <Male />
-                </el-icon>
-              </div>
+                </el-icon></div>
             </div>
             <div class="coins">
               <span class="coins-text">硬币: </span>
               <span class="coins-num">{{ user.coin }}</span>
             </div>
             <div class="counts">
-              <a :href="`/space/${user.uid}/fans/follow`" target="_blank" class="counts-item">
+              <!-- 绑定href请求获取`/space/${user.uid}/fans/follow` -->
+              <a :href="``" target="_blank" class="counts-item">
                 <div class="count-num">{{ handleNum(user.followsCount) }}</div>
                 <div class="count-text">关注</div>
               </a>
-              <a :href="`/space/${user.uid}/fans/fans`" target="_blank" class="counts-item">
+              <!-- 绑定href请求获取`/space/${user.uid}/fans/fans` -->
+              <a :href="``" target="_blank" class="counts-item">
                 <div class="count-num">{{ handleNum(user.fansCount) }}</div>
                 <div class="count-text">粉丝</div>
               </a>
-              <a :href="`/space/${user.uid}/dynamic`" target="_blank" class="counts-item">
+              <!-- 绑定href请求获取`/space/${user.uid}/dynamic` -->
+              <a :href="``" target="_blank" class="counts-item">
                 <div class="count-num">{{ handleNum(0) }}</div>
                 <div class="count-text">动态</div>
               </a>
             </div>
-            <div class="single-item middle" @click="openNewPage('/account')">
+            <div class="single-item middle" @click="openNewPage('/')">
               <div class="single-item-left">
                 <el-icon size="16">
                   <User />
@@ -293,7 +141,7 @@
                 <ArrowRightBold />
               </el-icon>
             </div>
-            <div class="single-item middle" @click="openNewPage('/platform/upload-manager')">
+            <div class="single-item middle" @click="openNewPage('/')">
               <div class="single-item-left">
                 <el-icon size="16">
                   <Document />
@@ -304,7 +152,7 @@
                 <ArrowRightBold />
               </el-icon>
             </div>
-            <div class="single-item middle" @click="noPage">
+            <div class="single-item middle" @click="openNewPage('/')">
               <div class="single-item-left">
                 <el-icon size="16">
                   <Star />
@@ -324,7 +172,7 @@
         </div>
       </div>
       <div class="vip-wrap">
-        <div class="right-entry--outside" @click="noPage">
+        <div class="right-entry--outside" @click="openNewPage('/')">
           <i class="iconfont icon-huiyuan1"></i>
           <span>大会员</span>
         </div>
@@ -332,65 +180,49 @@
       <div class="v-popover-wrap">
         <VPopover pop-style="padding-top: 17px;">
           <template #reference>
-            <div class="red-num--dynamic" v-if="user.uid && msgUnread > 0">
-              {{ msgUnread > 99 ? '99+' : msgUnread }}
+            <div class="red-num--dynamic" v-if="user.uid && msgUnread > 0">{{ msgUnread > 99 ? '99+' : msgUnread }}
             </div>
-            <div
-              class="right-entry--outside"
-              @click="this.$store.state.isLogin ? openNewPage('/message') : (dialogVisible = true)"
-            >
+            <div class="right-entry--outside"
+              @click="store.state.isLogin ? openNewPage('/message') : dialogVisible = true;">
               <i class="iconfont icon-xinfeng"></i>
               <span>消息</span>
             </div>
           </template>
           <template #content>
-            <div class="message-entry-popover" v-if="this.$store.state.isLogin">
+            <div class="message-entry-popover" v-if="store.state.isLogin">
               <div class="message-inner-list">
-                <div class="message-inner-list__item" @click="openNewPage('/message/reply')">
+                <div class="message-inner-list__item" @click="openNewPage('/')">
                   回复我的
-                  <span class="notify-number" v-if="this.$store.state.msgUnread[0] > 0">
-                    {{
-                      this.$store.state.msgUnread[0] <= 99 ? this.$store.state.msgUnread[0] : '99+'
-                    }}
-                  </span>
+                  <span class="notify-number" v-if="store.state.msgUnread[0] > 0">
+                    {{ store.state.msgUnread[0] <= 99 ? store.state.msgUnread[0] : '99+' }} </span>
                 </div>
-                <div class="message-inner-list__item" @click="openNewPage('/message/at')">
+                <div class="message-inner-list__item" @click="openNewPage('/')">
                   @ 我的
-                  <span class="notify-number" v-if="this.$store.state.msgUnread[1] > 0">
-                    {{
-                      this.$store.state.msgUnread[1] <= 99 ? this.$store.state.msgUnread[1] : '99+'
-                    }}
-                  </span>
+                  <span class="notify-number" v-if="store.state.msgUnread[1] > 0">
+                    {{ store.state.msgUnread[1] <= 99 ? store.state.msgUnread[1] : '99+' }} </span>
                 </div>
-                <div class="message-inner-list__item" @click="openNewPage('/message/love')">
+                <div class="message-inner-list__item" @click="openNewPage('/')">
                   收到的赞
-                  <span class="notify-number" v-if="this.$store.state.msgUnread[2] > 0">
-                    {{
-                      this.$store.state.msgUnread[2] <= 99 ? this.$store.state.msgUnread[2] : '99+'
-                    }}
-                  </span>
+                  <span class="notify-number" v-if="store.state.msgUnread[2] > 0">
+                    {{ store.state.msgUnread[2] <= 99 ? store.state.msgUnread[2] : '99+' }} </span>
                 </div>
-                <div class="message-inner-list__item" @click="openNewPage('/message/system')">
+                <div class="message-inner-list__item" @click="openNewPage('/')">
                   系统消息
-                  <span class="notify-number" v-if="this.$store.state.msgUnread[3] > 0">
-                    {{
-                      this.$store.state.msgUnread[3] <= 99 ? this.$store.state.msgUnread[3] : '99+'
-                    }}
-                  </span>
+                  <span class="notify-number" v-if="store.state.msgUnread[3] > 0">
+                    {{ store.state.msgUnread[3] <= 99 ? store.state.msgUnread[3] : '99+' }} </span>
                 </div>
-                <div class="message-inner-list__item" @click="openNewPage('/message/whisper')">
+                <div class="message-inner-list__item" @click="openNewPage('/')">
                   我的消息
-                  <span class="notify-number" v-if="this.$store.state.msgUnread[4] > 0">
-                    {{
-                      this.$store.state.msgUnread[4] <= 99 ? this.$store.state.msgUnread[4] : '99+'
-                    }}
-                  </span>
+                  <span class="notify-number" v-if="store.state.msgUnread[4] > 0">
+                    {{ store.state.msgUnread[4] <= 99 ? store.state.msgUnread[4] : '99+' }} </span>
                 </div>
               </div>
             </div>
             <div class="not-login" v-else>
               <p class="not-login-tips">登录即可查看消息记录</p>
-              <div class="not-login-btn" @click="dialogVisible = true">立即登录</div>
+              <div class="not-login-btn" @click="dialogVisible = true;">
+                立即登录
+              </div>
             </div>
           </template>
         </VPopover>
@@ -398,90 +230,74 @@
       <div class="v-popover-wrap">
         <VPopover pop-style="padding-top: 17px;">
           <template #reference>
-            <div
-              class="right-entry--outside"
-              @click="this.$store.state.isLogin ? noPage() : (dialogVisible = true)"
-            >
+            <div class="right-entry--outside" @click="store.state.isLogin ? openNewPage('/') : dialogVisible = true;">
               <i class="iconfont icon-fengche"></i>
               <span>动态</span>
             </div>
           </template>
           <template #content>
-            <div style="height: 557.3px; width: 371.6px" v-if="this.$store.state.isLogin"></div>
+            <div style="height: 557.3px; width: 371.6px;" v-if="store.state.isLogin">
+
+            </div>
             <div class="not-login" v-else>
               <p class="not-login-tips">登录即可查看关注动态</p>
-              <div class="not-login-btn" @click="dialogVisible = true">立即登录</div>
+              <div class="not-login-btn" @click="dialogVisible = true;">
+                立即登录
+              </div>
             </div>
           </template>
         </VPopover>
       </div>
       <div class="v-popover-wrap">
-        <VPopover
-          :pop-style="
-            this.$store.state.isLogin
-              ? 'padding-top: 17px; margin-left: -100px;'
-              : 'padding-top: 17px;'
-          "
-        >
+        <VPopover :pop-style="store.state.isLogin ? 'padding-top: 17px; margin-left: -100px;' : 'padding-top: 17px;'">
           <template #reference>
-            <div
-              class="right-entry--outside"
-              @click="this.$store.state.isLogin ? noPage() : (dialogVisible = true)"
-            >
+            <div class="right-entry--outside" @click="store.state.isLogin ? openNewPage('/') : dialogVisible = true;">
               <i class="iconfont icon-shoucang"></i>
               <span>收藏</span>
             </div>
           </template>
           <template #content>
-            <div style="height: 556.6px; width: 521.6px" v-if="this.$store.state.isLogin"></div>
+            <div style="height: 556.6px; width: 521.6px;" v-if="store.state.isLogin">
+
+            </div>
             <div class="not-login" v-else>
               <p class="not-login-tips">登录即可查看我的收藏</p>
-              <div class="not-login-btn" @click="dialogVisible = true">立即登录</div>
+              <div class="not-login-btn" @click="dialogVisible = true;">
+                立即登录
+              </div>
             </div>
           </template>
         </VPopover>
       </div>
       <div class="v-popover-wrap">
-        <VPopover
-          :pop-style="
-            this.$store.state.isLogin
-              ? 'padding-top: 17px; margin-left: -50px;'
-              : 'padding-top: 17px;'
-          "
-        >
+        <VPopover :pop-style="store.state.isLogin ? 'padding-top: 17px; margin-left: -50px;' : 'padding-top: 17px;'">
           <template #reference>
-            <div
-              class="right-entry--outside"
-              @click="this.$store.state.isLogin ? noPage() : (dialogVisible = true)"
-            >
+            <div class="right-entry--outside" @click="store.state.isLogin ? openNewPage('/') : dialogVisible = true;">
               <i class="iconfont icon-lishijilu"></i>
               <span>历史</span>
             </div>
           </template>
           <template #content>
-            <div style="height: 556.6px; width: 371.6px" v-if="this.$store.state.isLogin"></div>
+            <div style="height: 556.6px; width: 371.6px;" v-if="store.state.isLogin">
+
+            </div>
             <div class="not-login" v-else>
               <p class="not-login-tips">登录即可查看历史记录</p>
-              <div class="not-login-btn" @click="dialogVisible = true">立即登录</div>
+              <div class="not-login-btn" @click="dialogVisible = true;">
+                立即登录
+              </div>
             </div>
           </template>
         </VPopover>
       </div>
-      <div
-        class="right-entry-item"
-        @click="this.$store.state.isLogin ? openNewPage('/platform') : (dialogVisible = true)"
-      >
+      <div class="right-entry-item" @click="store.state.isLogin ? openNewPage('/') : dialogVisible = true;">
         <div class="right-entry--outside">
           <i class="iconfont icon-dengpao"></i>
           <span>创作中心</span>
         </div>
       </div>
-      <div
-        class="right-entry-item right-entry-item--upload"
-        @click="
-          this.$store.state.isLogin ? openNewPage('/platform/upload') : (dialogVisible = true)
-        "
-      >
+      <div class="right-entry-item right-entry-item--upload"
+        @click="store.state.isLogin ? openNewPage('/') : dialogVisible = true;">
         <div class="upload-buttom">
           <i class="iconfont icon-shangchuan"></i>
           <span>投稿</span>
@@ -491,257 +307,128 @@
   </div>
   <!-- 登录框 -->
   <el-dialog v-model="dialogVisible" :close-on-click-modal="false" destroy-on-close align-center>
-    <LoginRegister @loginSuccess="dialogVisible = false"></LoginRegister>
+    <LoginRegister @loginSuccess="dialogVisible = false;"></LoginRegister>
   </el-dialog>
 </template>
 
-<script>
-let inTimer // 节流计时器
-let outTimer
+
+<script setup>
 import VPopover from '@/components/raw_comp/popover/VPopover.vue'
 import LoginRegister from '@/components/raw_comp/login_register/LoginRegister.vue'
-import UserAvatar from '@/components/raw_comp/avatar/UserAvatar.vue'
-import { ElMessage } from 'element-plus'
 import { handleNum, handleLevel, highlightKeyword } from '@/utils/utils.js'
+import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
+import store from '@/store'
+import router from '@/router'
 
-export default {
-  name: 'HeaderBarIndex',
-  components: {
-    VPopover,
-    LoginRegister,
-    UserAvatar,
-  },
-  data() {
-    return {
-      // 首页是否展开频道
-      isOpen: false,
-      // 需要搜索的内容
-      searchInput: '',
-      // 是否正在输入中文
-      isComposite: false,
-      // 搜索推荐词
-      matchingWord: [],
-      // 是否显示搜索气泡框
-      isSearchPopShow: false,
-      // 搜索历史
-      histories: [],
-      // 是否展开搜索历史
-      isHistoryOpen: false,
-      // 头像气泡框的显隐
-      popoverDisplay: 'none',
-      isPopoverShow: false,
-      // 登录框组件的显隐
-      dialogVisible: false,
-      // 屏幕宽度
-      screenWidth: window.innerWidth,
-    }
-  },
-  props: {
-    // 是否是固钉导航栏
-    isFixHeaderBar: {
-      type: Boolean,
-      default() {
-        return false
-      },
-    },
-    // 是否显示搜索输入框
-    isShowSearchInput: {
-      type: Boolean,
-      default() {
-        return true
-      },
+defineProps({
+  // 是否是固钉导航栏
+  isFixHeaderBar: {
+    type: Boolean,
+    default() {
+      return false
     },
   },
-  computed: {
-    user() {
-      return this.$store.state.user
-    },
-    // 计算消息未读数
-    msgUnread() {
-      let count = 0
-      for (var i = 0; i < 5; i++) {
-        count += this.$store.state.msgUnread[i]
-      }
-      return count
+  // 是否显示搜索输入框
+  isShowSearchInput: {
+    type: Boolean,
+    default() {
+      return true
     },
   },
-  methods: {
-    //////// 请求 ////////
+})
+let isHistoryOpen = ref(false)
+const user = computed(() => {
+  return store.state.user
+})
 
-    // 获取搜索推荐
-    async getMatchingWord() {
-      if (this.searchInput.trim() === '') return
-      const keyword = encodeURIComponent(this.searchInput) // 对特殊字符进行编译
-      const res = await this.$get('/search/word/get', { params: { keyword: keyword } })
-      this.matchingWord = res.data.data
-      // console.log("推荐搜索词:", this.matchingWord);
-    },
+console.log(user.value)
 
-    //////// 事件 ////////
+// 首页是否展开频道
+let isOpen = ref(false)
+// 需要搜索的内容
+let searchInput = ref("")
 
-    // 边输入边查询相关搜索词条
-    handleInput() {
-      if (this.isComposite) return // 如果正在输入拼音 就终止触发函数
-      this.getMatchingWord()
-    },
+// 登录框组件的显隐
+let dialogVisible = ref(false)
 
-    // 完成中文输入
-    compositionend() {
-      this.isComposite = false
-      this.handleInput()
-    },
+// 是否显示搜索气泡框
+let isSearchPopShow = ref(false)
 
-    // 前往搜索的回调
-    goSearch() {
-      this.searchPopHide()
-      let input = this.searchInput.trim()
-      const index = this.histories.indexOf(input)
-      if (index != -1) {
-        // 值已存在，移除该值
-        this.histories.splice(index, 1)
-      }
-      this.histories.unshift(input) // 在列表开头插入新记录
-      this.saveToLocalStorage()
-      if (input === '') {
-        // 输入空白符跳转搜索首页
-        this.openNewPage('/search')
-      } else {
-        // 否则就跳搜索详情页
-        this.openNewPage(`/search/video?keyword=${input}`)
-      }
-    },
+// 显示搜索气泡框
+function searchPopShow() {
+  isSearchPopShow.value = true
+  // console.log("显示热搜框: ", this.isSearchPopShow);
+}
 
-    // 显示搜索气泡框
-    searchPopShow() {
-      this.isSearchPopShow = true
-      this.getMatchingWord()
-      // console.log("显示热搜框: ", this.isSearchPopShow);
-    },
+// 隐藏搜索气泡框
+function searchPopHide() {
+  isSearchPopShow.value = false
+  // console.log("显示热搜框: ", this.isSearchPopShow);
+}
 
-    // 隐藏搜索气泡框
-    searchPopHide() {
-      this.isSearchPopShow = false
-      // console.log("显示热搜框: ", this.isSearchPopShow);
-    },
+const searchPop = ref(null)
+const searchForm = ref(null)
+// 点击搜索框和气泡框外的空白处关闭气泡
+function handleOutsideClick(event) {
+  const formElement = searchForm // 输入框元素
+  const popoverElement = searchPop // 气泡框元素
+  if (!formElement.value.contains(event.target) && !popoverElement.value.contains(event.target)) {
+    searchPopHide()
+  }
+}
 
-    // 点击搜索框和气泡框外的空白处关闭气泡
-    handleOutsideClick(event) {
-      const formElement = this.$refs.searchForm // 输入框元素
-      const popoverElement = this.$refs.searchPop // 气泡框元素
-      if (!formElement.contains(event.target) && !popoverElement.contains(event.target)) {
-        this.searchPopHide()
-      }
-    },
 
-    // 将搜索历史存到浏览器
-    saveToLocalStorage() {
-      localStorage.setItem('historiesSearch', JSON.stringify(this.histories))
-    },
+function goSearch() {
 
-    // 从浏览器中加载搜索历史
-    loadFromLocalStorage() {
-      const storedList = localStorage.getItem('historiesSearch')
-      // console.log("浏览器中的搜索历史: ", storedList);
-      if (storedList) {
-        this.histories = JSON.parse(storedList)
-      }
-    },
+}
+// 头像气泡框的显隐
+let popoverDisplay = ref("none")
+let isPopoverShow = ref(false)
 
-    // 在输入框按下回车的回调
-    onSubmit(e) {
-      // console.log(e);
-      if (e.key === 'Enter') {
-        this.goSearch()
-      }
-    },
+// 节流计时器
+let inTimer, outTimer
 
-    // 删除单个搜索历史
-    removeHistory(index) {
-      this.histories.splice(index, 1)
-      this.saveToLocalStorage()
-    },
+// 悬浮头像时，气泡的显隐
+function handleMouseEnter() {
+  clearTimeout(outTimer) // 这里要清除隐藏的计时器，否则在0.2秒内出入头像，会导致头像变大但气泡突然消失
+  inTimer = setTimeout(() => {
+    popoverDisplay.value = ''
+    isPopoverShow.value = true
+  }, 100)
+}
 
-    // 清空全部搜索历史
-    removeAllHistories() {
-      this.histories = []
-      localStorage.removeItem('historiesSearch')
-    },
+function handleMouseLeave() {
+  clearTimeout(inTimer) // 清除显示计时器防止快速经过头像时的气泡闪烁
+  isPopoverShow.value = false
+  outTimer = setTimeout(() => {
+    popoverDisplay.value = 'none'
+  }, 200)
+}
 
-    // 点击条目搜索
-    clickItemToSearch(value) {
-      this.searchInput = value
-      this.goSearch()
-    },
+// 屏幕宽度
+let screenWidth = ref(window.innerWidth)
 
-    // 悬浮头像时，气泡的显隐
-    handleMouseEnter() {
-      clearTimeout(outTimer) // 这里要清除隐藏的计时器，否则在0.2秒内出入头像，会导致头像变大但气泡突然消失
-      inTimer = setTimeout(() => {
-        this.popoverDisplay = ''
-        this.isPopoverShow = true
-      }, 100)
-    },
-    handleMouseLeave() {
-      clearTimeout(inTimer) // 清除显示计时器防止快速经过头像时的气泡闪烁
-      this.isPopoverShow = false
-      outTimer = setTimeout(() => {
-        this.popoverDisplay = 'none'
-      }, 200)
-    },
+function updateScreenWidth() {
+  screenWidth.value = window.innerWidth
+}
 
-    updateScreenWidth() {
-      this.screenWidth = window.innerWidth
-    },
+onMounted(() => {
+  // 页面渲染后创建点击事件的监听器
+  window.addEventListener("click", handleOutsideClick);
+  // 监听窗口大小变化，更新屏幕宽度
+  window.addEventListener('resize', updateScreenWidth);
+})
 
-    // 退出登录
-    logout() {
-      this.$store.dispatch('logout')
-    },
+onBeforeUnmount(() => {
+  // 页面结束渲染前销毁事件的监听器
+  window.removeEventListener("click", handleOutsideClick);
+  window.removeEventListener('resize', updateScreenWidth);
+})
 
-    // 打开新标签页
-    openNewPage(route) {
-      window.open(this.$router.resolve(route).href, '_blank')
-    },
 
-    // 处理大于一万的数字
-    handleNum(number) {
-      return handleNum(number)
-    },
-
-    // 计算用户等级
-    handleLevel(exp) {
-      return handleLevel(exp)
-    },
-
-    // 高亮关键词
-    highlightKeyword(text) {
-      return highlightKeyword(this.searchInput, text)
-    },
-
-    noPage() {
-      ElMessage.warning('该功能暂未开放')
-    },
-  },
-  mounted() {
-    // 页面渲染后创建点击事件的监听器
-    window.addEventListener('click', this.handleOutsideClick)
-    // 在页面加载时从本地存储中加载搜索历史
-    this.loadFromLocalStorage()
-    // 监听窗口大小变化，更新屏幕宽度
-    window.addEventListener('resize', this.updateScreenWidth)
-  },
-  beforeUnmount() {
-    // 页面结束渲染前销毁事件的监听器
-    window.removeEventListener('click', this.handleOutsideClick)
-    window.removeEventListener('resize', this.updateScreenWidth)
-  },
-  watch: {
-    '$store.state.openLogin'(curr) {
-      if (curr) {
-        this.dialogVisible = true
-      }
-    },
-  },
+// 退出登录
+function logout() {
+  store.dispatch('logout')
 }
 </script>
 
@@ -1642,6 +1329,7 @@ export default {
 
 /* 跳动效果 */
 @keyframes jump {
+
   0%,
   100% {
     transform: translateY(0);
